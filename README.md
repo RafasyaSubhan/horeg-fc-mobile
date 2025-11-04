@@ -1,16 +1,40 @@
-# horeg_fc
+# Horeg FC
+<details>
+<Summary><b>Tugas 7</b></Summary>
 
-A new Flutter project.
+## Jelaskan apa itu widget tree pada Flutter dan bagaimana hubungan parent-child (induk-anak) bekerja antar widget!
+Secara sederhana, Widget Tree adalah kerangka dari seluruh User Interface (UI). Seperti namanya, widget tree adalah struktur data hierarkis (pohon) yang memberi tahu Flutter bagaimana cara menyusun, menata letak, dan merender setiap elemen visual di layar.
+Definisi parent-child di sini adalah bagaimana widget 'dibungkus' dalam widget yang lain. Widget parent adalah widget yang 'membungkus' widget lain. Sedangkan widget child adalah widget yang 'dibungkus' di dalam parent.
 
-## Getting Started
+## Sebutkan semua widget yang kamu gunakan dalam proyek ini dan jelaskan fungsinya!
+* MaterialApp: Widget root yang menyediakan struktur dasar aplikasi 
+* StatelessWidget: Tipe widget dasar untuk UI yang tidak berubah secara internal 
+* Scaffold: Menyediakan struktur layout dasar material design 
+* AppBar: Menampilkan bar navigasi atas Text: Menampilkan teks 
+* Padding: Memberi ruang kosong (bantalan) di sekitar widget 
+* Column: Menyusun widget secara vertikal 
+* Row: Menyusun widget secara horizontal 
+* SizedBox: Membuat kotak kosong dengan ukuran tetap (biasa untuk spasi) 
+* Center: Memposisikan widget anaknya di tengah 
+* GridView: Menampilkan widget dalam grid 
+* Card: Menampilkan panel dengan tampilan material design 
+* Container: Wadah yang dapat dikustomisasi 
+* Material: Potongan Material Design (dipakai untuk memberi warna/bentuk) 
+* InkWell: Membuat area yang dapat diklik 
+* Icon: Menampilkan ikon
 
-This project is a starting point for a Flutter application.
+## Apa fungsi dari widget MaterialApp? Jelaskan mengapa widget ini sering digunakan sebagai widget root!
+MaterialApp adalah widget inti yang membungkus seluruh aplikasi Anda untuk memberikan fungsionalitas dan standar Material Design (sistem desain Google).
+Fungsinya adalah sebagai "pengatur" level atas yang menyediakan berbagai layanan penting ke semua widget di bawahnya (keturunannya). Layanan ini meliputi Tema, Navigasi, Halaman Awal, Layanan Bawaan
+MaterialApp sering digunakan sebagai widget roo karena ia perlu membungkus semua widget lain agar bisa menyediakan layanan-layanan di atas.
 
-A few resources to get you started if this is your first Flutter project:
+## Jelaskan perbedaan antara StatelessWidget dan StatefulWidget! Kapan kamu memilih salah satunya?
+StatelessWidget adalah widget yang statis, tidak bisa diberubah meskipun diberi perilaku apapun (immutable). StatefulWidget adalah widget yang dinamis, bisa berubah jika mendapat perilaku yang didefinisikan.
+Pilih StatelessWidget jika hanya perlu menampilkan informasi saja, tidak perlu mengelola data apapun. Sedangkan, pilih StatefulWidget saat UI Widgetnya bergantung dengan data yang bisa berubah karena interaksi pengguna, seperti checkbox.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Apa itu BuildContext dan mengapa penting di Flutter? Bagaimana penggunaannya di metode build?
+BuildContext penting karena ia adalah satu-satunya cara bagi sebuah widget untuk berinteraksi dengan ancestor-nya (parent, grandparent, dll). Ia digunakan untuk "mencari" widget atau layanan lain yang ada di atasnya dalam tree. Di dalam mode build, parameter yang digunakan untuk mengambil data dari widget ancestor-nya adalah context.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Jelaskan konsep "hot reload" di Flutter dan bagaimana bedanya dengan "hot restart"!
+Hot reload: Mengubah UI dengan sangat cepat tanpa menghilangkan state
+Hot restart: Memuat ulang seluruh aplikasi dari awal dan mereset semua datanya
