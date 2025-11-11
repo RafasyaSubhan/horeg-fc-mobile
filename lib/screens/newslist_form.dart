@@ -12,6 +12,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
     final _formKey = GlobalKey<FormState>();
     String _title = "";
     String _content = "";
+    int _harga = 0;
     String _category = "jersey";
     String _thumbnail = "";
     bool _isFeatured = false;
@@ -61,12 +62,16 @@ class _NewsFormPageState extends State<NewsFormPage> {
                               },
                               validator: (String? value) {
                                 if (value == null || value.isEmpty) {
-                                  return "Judul tidak boleh kosong!";
+                                  return "Nama Product tidak boleh kosong!";
+                                }
+                                if(value.length < 4){
+                                  return "Nama product minimal 4 karakter!";
                                 }
                                 return null;
                               },
                             ),
                           ),
+
                           // === Content ===
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -88,11 +93,50 @@ class _NewsFormPageState extends State<NewsFormPage> {
                                 if (value == null || value.isEmpty) {
                                   return "Deskripsi tidak boleh kosong!";
                                 }
+                                if(value.length < 10){
+                                  return "Deskripsi minimal 10 karakter!";
+                                }
                                 return null;
                               },
                             ),
                           ),
 
+                          // === Harga ===
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                hintText: "Harga Product (contoh: 500000)",
+                                labelText: "Harga Product",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                              ),
+                              keyboardType: TextInputType.number,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  _harga = int.tryParse(value ?? '0') ?? 0;
+                                });
+                              },
+                              
+                              // 4. Validator jadi penjaga utamanya
+                              validator: (String? value){
+                                if(value == null || value.isEmpty){
+                                  return "Harga tidak boleh kosong!";
+                                }
+                                
+                                final int? price = int.tryParse(value);
+                                if(price == null){
+                                  return "Harga harus berupa angka integer (contoh: 150000)";
+                                }
+                                
+                                if(price <= 0){
+                                  return "Harga harus lebih besar dari 0!";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
                           // === Category ===
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -135,6 +179,19 @@ class _NewsFormPageState extends State<NewsFormPage> {
                                   _thumbnail = value!;
                                 });
                               },
+                              validator: (String? value){
+                                if(value == null || value.trim().isEmpty){
+                                  return null;
+                                }
+                                final Uri? uri = Uri.tryParse(value);
+                                if(uri == null || (!uri.isScheme('http') && !uri.isScheme('https://'))){
+                                  return "Format URL tidak valid, gunakan https:// atau https://";
+                                }
+                                if(uri.host.isEmpty){
+                                  return "URL harus memiliki domain, seperti google.com";
+                                }
+                                return null;
+                              },
                             ),
                           ),
 
@@ -174,6 +231,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
                                               children: [
                                                 Text('Nama: $_title'),
                                                 Text('Deskripsi: $_content'),
+                                                Text('Harga: $_harga'),
                                                 Text('Kategori: $_category'),
                                                 Text('Thumbnail: $_thumbnail'),
                                                 Text(
