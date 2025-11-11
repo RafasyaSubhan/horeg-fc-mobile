@@ -38,3 +38,26 @@ BuildContext penting karena ia adalah satu-satunya cara bagi sebuah widget untuk
 ## Jelaskan konsep "hot reload" di Flutter dan bagaimana bedanya dengan "hot restart"!
 Hot reload: Mengubah UI dengan sangat cepat tanpa menghilangkan state
 Hot restart: Memuat ulang seluruh aplikasi dari awal dan mereset semua datanya
+</details>
+<details>
+<Summary><b>Tugas 8</b></Summary>
+
+## Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement() pada Flutter. Dalam kasus apa sebaiknya masing-masing digunakan pada aplikasi Football Shop kamu?
+Navigator.push() menambahkan halaman baru di atas stack navigasi, sedangkan Navigator.pushReplacement menghapus halaman sekarang dan menambahkan halaman baru. Navigator.push() saat pengguna dapat kembali ke halaman sebelumnya, seperti dari homescreen pindah halaman dan dapat kembali ke homescreen lagi. Sedangkan, Navigator.pushReplacement() saat pengguna tidak boleh kembali, contohnya saat login pengguna yang berhasil login diharapkan tidak dapat kembali ke halaman login kembali.
+
+## Bagaimana kamu memanfaatkan hierarchy widget seperti Scaffold, AppBar, dan Drawer untuk membangun struktur halaman yang konsisten di seluruh aplikasi?
+`Scaffold`: Kerangka dasar dari sebuah halaman design. Scaffold berguna sebagai tempat untuk meletakkan `Appbar`, `Drawer`, `Body`, dan lainnya 
+`Appbar`: Sebagai header di bagian atas. Appbar berguna untuk judul halaman, tombol, dan ikon untuk membuka `Drawer`
+`Drawer`: Menu navigasi utama yang tersembunyi. Gunanya untuk menampung link ke halaman-halaman utama aplikasi.
+
+## Dalam konteks desain antarmuka, apa kelebihan menggunakan layout widget seperti Padding, SingleChildScrollView, dan ListView saat menampilkan elemen-elemen form? Berikan contoh penggunaannya dari aplikasi kamu.
+`Padding`: Readability karena memberikan ruang antar widget
+Contoh di newslist_form.dart ada Padding(padding: const EdgeInsets.all(8.0),...)
+`SingleChildScrollView`: Memberikan ruang dan mengizinkan pengguna untuk scroll area yang tertutup misalnya oleh keyboard
+Contoh di newslist_form.dart ada ...child: SingleChildScrollView(...)
+`ListView`: Mirip dengan SingleChildScrollView, ListView membuat pengguna dapat scroll area yang tertutup
+Tidak pakai ListView karena udah ada SingleChildScrollView, tetapi contoh lainnya adalah body: ListView.builder(...)
+
+## Bagaimana kamu menyesuaikan warna tema agar aplikasi Football Shop memiliki identitas visual yang konsisten dengan brand toko?
+Pertama menentukan color palette. Tentukan prime color, secondary, and background. Setelah itu bisa di-setting di ThemeData main.dart. Seharusnya menghapus pewarnaan manual di file lain, tetapi karena saya ada kendala main.dart tidak bisa pakai warna spesifik (karena pakai primarySwatch)
+</details>

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:horeg_fc/menu.dart';
+import 'package:horeg_fc/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
