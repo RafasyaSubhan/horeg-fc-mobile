@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:horeg_fc/screens/newslist_form.dart';
+import 'package:horeg_fc/screens/productlist_form.dart';
 import 'package:horeg_fc/screens/menu.dart';
+import 'package:horeg_fc/screens/product_entry_list.dart';
+
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
@@ -23,8 +25,16 @@ class ItemCard extends StatelessWidget {
           if (item.name == "Create Product") {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const NewsFormPage()),
+              MaterialPageRoute(builder: (context) => const ProductFormPage()),
             );
+          }
+          else if (item.name == "All Product") {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProductEntryListPage()
+                  ),
+              );
           }
         },
 

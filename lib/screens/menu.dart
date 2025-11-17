@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:horeg_fc/widgets/left_drawer.dart';
-import 'package:horeg_fc/widgets/news_card.dart';
+import 'package:horeg_fc/widgets/product_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});

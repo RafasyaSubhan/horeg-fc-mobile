@@ -52,9 +52,9 @@ Navigator.push() menambahkan halaman baru di atas stack navigasi, sedangkan Navi
 
 ## Dalam konteks desain antarmuka, apa kelebihan menggunakan layout widget seperti Padding, SingleChildScrollView, dan ListView saat menampilkan elemen-elemen form? Berikan contoh penggunaannya dari aplikasi kamu.
 `Padding`: Readability karena memberikan ruang antar widget
-Contoh di newslist_form.dart ada Padding(padding: const EdgeInsets.all(8.0),...)
+Contoh di productlist_form.dart ada Padding(padding: const EdgeInsets.all(8.0),...)
 `SingleChildScrollView`: Memberikan ruang dan mengizinkan pengguna untuk scroll area yang tertutup misalnya oleh keyboard
-Contoh di newslist_form.dart ada ...child: SingleChildScrollView(...)
+Contoh di productlist_form.dart ada ...child: SingleChildScrollView(...)
 `ListView`: Mirip dengan SingleChildScrollView, ListView membuat pengguna dapat scroll area yang tertutup
 Tidak pakai ListView karena udah ada SingleChildScrollView, tetapi contoh lainnya adalah body: ListView.builder(...)
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:horeg_fc/screens/menu.dart';
-import 'package:horeg_fc/screens/newslist_form.dart';
+import 'package:horeg_fc/screens/productlist_form.dart';
+import 'package:horeg_fc/screens/product_entry_list.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -12,7 +13,7 @@ class LeftDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.indigo,
             ),
             child: Column(
               children: [
@@ -41,19 +42,30 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Home'),
             // Bagian redirection ke MyHomePage
             onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyHomePage(),
-                  ));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyHomePage(),
+                )
+              );
             },
           ),
           ListTile(
             leading: const Icon(Icons.post_add),
             title: const Text('Create Product'),
-            // Bagian redirection ke NewsFormPage
+            // Bagian redirection ke ProductFormPage
            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => NewsFormPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductFormPage()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_shopping_cart),
+            title: const Text('Add Product'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ProductFormPage()),
+              );
             },
           ),
         ],
