@@ -20,13 +20,12 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Horeg FC',
+          "ℌ𝔬𝔯𝔢𝔤 𝔉ℭ'",
           style: TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.indigo.shade900
+        backgroundColor: Colors.white
       ),
       drawer: LeftDrawer(), // Tambahkan drawer
       body: Padding(
@@ -98,6 +97,7 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
       elevation: 2.0,
       child: Container(
         width: MediaQuery.of(context).size.width / 3.5,

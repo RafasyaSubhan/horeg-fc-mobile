@@ -18,6 +18,7 @@ class ProductEntryCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Card(
+          color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
             side: BorderSide(color: Colors.grey.shade300),

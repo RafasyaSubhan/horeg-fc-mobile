@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:horeg_fc/screens/menu.dart';
 import 'package:horeg_fc/screens/productlist_form.dart';
 import 'package:horeg_fc/screens/product_entry_list.dart';
+import 'package:horeg_fc/app_colors.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -9,16 +10,17 @@ class LeftDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: AppColors.white,
       child: ListView(
         children: [
-          const DrawerHeader(
+          DrawerHeader( // Harusnya const DrawerHeader( -> Apus const biar bisa shade di colors
             decoration: BoxDecoration(
-              color: Colors.indigo,
+              color: AppColors.sage,
             ),
             child: Column(
               children: [
                 Text(
-                  'Horeg FC',
+                  "ℌ𝔬𝔯𝔢𝔤 𝔉ℭ'",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -51,11 +53,11 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.post_add),
-            title: const Text('Create Product'),
-            // Bagian redirection ke ProductFormPage
+            leading: const Icon(Icons.shopping_bag),
+            title: const Text('Show Product'),
+            // Bagian redirection ke Product
            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductFormPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductEntryListPage()));
             },
           ),
           ListTile(

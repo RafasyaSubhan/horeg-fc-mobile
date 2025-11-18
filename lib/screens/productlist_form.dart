@@ -4,6 +4,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:horeg_fc/widgets/left_drawer.dart';
 import 'package:horeg_fc/screens/menu.dart';
+import 'package:horeg_fc/app_colors.dart';
 
 class ProductFormPage extends StatefulWidget {
     const ProductFormPage({super.key});
@@ -39,8 +40,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       'Create Product Form',
                     ),
                   ),
-                  backgroundColor: Colors.indigo.shade900,
-                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.white,
+                  foregroundColor: AppColors.sage,
                 ),
                 drawer: LeftDrawer(),
                 body: Form(
@@ -189,8 +190,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
                                   return null;
                                 }
                                 final Uri? uri = Uri.tryParse(value);
-                                if(uri == null || (!uri.isScheme('http') && !uri.isScheme('https://'))){
-                                  return "Format URL tidak valid, gunakan https:// atau https://";
+                                if(uri == null || (!uri.isScheme('http') && !uri.isScheme('https'))){
+                                  return "Format URL tidak valid, gunakan http:// atau https://";
                                 }
                                 if(uri.host.isEmpty){
                                   return "URL harus memiliki domain, seperti google.com";
@@ -225,8 +226,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
                                     // TODO: Replace the URL with your app's URL
-                                    // To connect Android emulator with Django on localhost, use URL http://10.0.2.2/
-                                    // If you using chrome,  use URL http://localhost:8000
                                     
                                     final response = await request.postJson(
                                       "http://localhost:8000/create-flutter/",
