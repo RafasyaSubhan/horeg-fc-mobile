@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 import 'package:horeg_fc/screens/productlist_form.dart';
 import 'package:horeg_fc/screens/menu.dart';
 import 'package:horeg_fc/screens/product_entry_list.dart';
-import 'package:horeg_fc/screens/login.dart';
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
@@ -13,13 +10,12 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
     return Material(
       color: item.color,
       borderRadius: BorderRadius.circular(12),
 
       child: InkWell(
-        onTap: () async {
+        onTap: () {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -35,34 +31,24 @@ class ItemCard extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ProductEntryListPage()
+                      builder: (context) => const ProductEntryListPage(
+                        endpointUrl: "http://localhost:8000/json/",
+                        pageTitle: "Our Collection",
+                      )
                   ),
               );
           }
-          else if (item.name == "Logout") {
-            final response = await request.logout(
-                "http://localhost:8000/auth/logout/");
-            String message = response["message"];
-            if (context.mounted) {
-                if (response['status']) {
-                    String uname = response["username"];
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("$message See you again, $uname."),
-                    ));
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LoginPage()),
-                    );
-                } 
-                else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(message),
-                        ),
-                    );
-                }
+          else if(item.name == "My Product"){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProductEntryListPage(
+                        endpointUrl: "http://localhost:8000/my-products-json/", 
+                        pageTitle: "My Products",
+                      )
+                  )
+              );
             }
-          }
         },
 
         child: Container(

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:horeg_fc/screens/menu.dart';
 import 'package:horeg_fc/screens/productlist_form.dart';
 import 'package:horeg_fc/screens/product_entry_list.dart';
 import 'package:horeg_fc/app_colors.dart';
+import 'package:horeg_fc/screens/login.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Drawer(
       backgroundColor: AppColors.white,
       child: ListView(
@@ -57,7 +61,10 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Show Product'),
             // Bagian redirection ke Product
            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductEntryListPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductEntryListPage(
+                endpointUrl: "http://localhost:8000/json/",
+                pageTitle: "Our Collection",
+              )));
             },
           ),
           ListTile(
@@ -68,6 +75,39 @@ class LeftDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => ProductFormPage()),
               );
+            },
+          ),
+          const Divider(color: AppColors.mossGreen),
+
+          // --- TOMBOL LOGOUT (Hanya di sini) ---
+          ListTile(
+            leading: const Icon(Icons.logout, color: AppColors.carmine), // Icon Merah
+            title: const Text('Logout', style: TextStyle(color: AppColors.carmine, fontWeight: FontWeight.bold)),
+            onTap: () async {
+              // Logika Logout
+              final response = await request.logout(
+                  "http://localhost:8000/auth/logout/");
+              
+              String message = response["message"];
+              if (context.mounted) {
+                if (response['status']) {
+                  String uname = response["username"];
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("$message See you again, $uname."),
+                  ));
+                  
+                  // Arahkan ke Login dan hapus history navigasi
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                    (route) => false,
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(message),
+                  ));
+                }
+              }
             },
           ),
         ],

@@ -7,7 +7,9 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:horeg_fc/screens/product_detail.dart';
 
 class ProductEntryListPage extends StatefulWidget {
-  const ProductEntryListPage({super.key});
+  final String endpointUrl;
+  final String pageTitle;
+  const ProductEntryListPage({super.key, required this.endpointUrl, required this.pageTitle});
 
   @override
   State<ProductEntryListPage> createState() => _ProductEntryListPageState();
@@ -15,7 +17,7 @@ class ProductEntryListPage extends StatefulWidget {
 
 class _ProductEntryListPageState extends State<ProductEntryListPage> {
   Future<List<ProductEntry>> fetchProduct(CookieRequest request) async {
-    final response = await request.get('http://localhost:8000/json/');
+    final response = await request.get(widget.endpointUrl);
     // Decode response to json format
     var data = response;
     
@@ -34,7 +36,7 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Entry List'),
+        title: Text(widget.pageTitle),
       ),
       drawer: const LeftDrawer(),
       body: FutureBuilder(

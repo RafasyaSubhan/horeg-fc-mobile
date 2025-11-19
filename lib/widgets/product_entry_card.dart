@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:horeg_fc/models/product_entry.dart';
+import 'package:horeg_fc/app_colors.dart';
 
 class ProductEntryCard extends StatelessWidget {
   final ProductEntry product;
@@ -59,7 +60,15 @@ class ProductEntryCard extends StatelessWidget {
 
                 // Category
                 Text('Category: ${product.fields.category}'),
+
+                const SizedBox(height: 4),
+                Text(
+                  'Rp ${product.fields.price}', 
+                  style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.carmine),
+                ),
+
                 const SizedBox(height: 6),
+
 
                 // Content preview
                 Text(

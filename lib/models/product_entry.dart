@@ -1,11 +1,6 @@
-// To parse this JSON data, do
-//
-//     final ProductEntry = ProductEntryFromJson(jsonString);
-
 import 'dart:convert';
 
 List<ProductEntry> ProductEntryFromJson(String str) => List<ProductEntry>.from(json.decode(str).map((x) => ProductEntry.fromJson(x)));
-
 String ProductEntryToJson(List<ProductEntry> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ProductEntry {
@@ -33,7 +28,7 @@ class ProductEntry {
 }
 
 class Fields {
-    int user;
+    String user;
     String name;
     int price;
     String description;
@@ -55,17 +50,36 @@ class Fields {
         required this.viewers,
     });
 
-    factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-        user: json["user"],
-        name: json["name"],
-        price: json["price"],
-        description: json["description"],
-        thumbnail: json["thumbnail"],
-        category: json["category"],
-        isFeatured: json["is_featured"],
-        dateTime: DateTime.parse(json["date_time"]),
-        viewers: json["viewers"],
-    );
+    factory Fields.fromJson(Map<String, dynamic> json) {
+        String userVal;
+        
+        // Cek apakah Django mengirim List ["username"]
+        if (json["user"] is List && (json["user"] as List).isNotEmpty) {
+            userVal = json["user"][0].toString();
+        } 
+        // Cek apakah Django mengirim ID (int)
+        else if (json["user"] is int) {
+            userVal = json["user"].toString();
+        } 
+        // Default jika string biasa
+        else {
+            userVal = json["user"].toString();
+        }
+
+        return Fields(
+            user: userVal, // Gunakan hasil parsing di atas
+            name: json["name"],
+            price: json["price"],
+            description: json["description"],
+            // Tambahkan handle null safety untuk thumbnail jika kosong
+            thumbnail: json["thumbnail"] ?? "", 
+            category: json["category"],
+            isFeatured: json["is_featured"],
+            dateTime: DateTime.parse(json["date_time"]),
+            // Tambahkan handle null safety untuk viewers
+            viewers: json["viewers"] ?? 0, 
+        );
+    }
 
     Map<String, dynamic> toJson() => {
         "user": user,
